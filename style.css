@@ -1,0 +1,126 @@
+body {
+  font-family: medium-content-sans-serif-font;
+  margin-left: 0;
+	margin-right: 0;
+}
+
+#header {
+	display: flex;
+	justify-content: space-between;
+}
+
+#logo {
+	margin-left: 100px;
+	margin-top: 4px;
+}
+
+#login-block {
+	font-size: normal;
+	margin-right: 140px;
+	color: rgb(2, 184, 117);
+	margin-top: 13px;
+	margin-bottom: 13px;
+}
+
+#sign-in {
+	color: rgb(2, 184, 117);
+	margin-right: 20px;
+}
+
+#sign-up {
+	border: 1px solid rgb(2, 184, 117);
+	padding: 8px 16px;
+	border-radius: 4px;
+}
+
+#navigation {
+	display: flex;
+	justify-content: flex-start;
+}
+
+#nav-img {
+	margin-left: 100px;
+	margin-bottom: 10px;
+}
+
+#nav-links {
+	color: grey;
+	margin-top: 10px;
+	font-size: 15px;
+  line-height: 20px;
+}
+
+#nav-links > span {
+  margin-left: 20px
+}
+
+#article {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	color: rgba(0, 0, 0, 0.84);
+	font-family: serif;
+  margin: 0 20%;
+}
+
+#article > * {
+  width:1 100%;
+}
+
+#title {
+	display: flex;
+  font-family: medium-content-title-font;
+  font-weight: 400px;
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: normal;
+  width: 100%;
+}
+
+#article-header {
+  width: 100%;
+}
+
+#user-block {
+  width: 100%;
+}
+
+#user-block > img {
+	float: left;
+}
+
+#share-block {
+  float: right;
+}
+
+#user-info {
+	margin-left: 10px;
+  display: inline-block;
+  font-size: 16px;
+  line-height: 20px;
+  font-family: medium-content-sans-serif-font;
+}
+
+#read {
+	color: gray;
+	margin-top: 2px;
+}
+
+#button_follow {
+	margin-left: 7px;
+	border: 1px solid black;
+	padding: 1px 7px;
+	border-radius: 4px;
+}
+
+#article-text {
+	font-size: 21px;
+  line-height: 1.6em;
+  font-family: medium-content-serif-font;
+}
+
+#article-text > p {
+  margin-top: 42px;
+  margin-bottom: 0;
+}
