@@ -1,0 +1,57 @@
+body {
+    font-family: 'Rubik', sans-serif;
+    background-image: linear-gradient(0.625turn, #764ba2, #667eea);
+    height: 100%;
+    margin: 0;
+}
+
+#title {
+    font-weight: 700;
+    font-size: 40px;
+    padding-top: 50px;
+    margin: 0;
+}
+
+#date {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+#input-wrapper{
+    text-align: center;
+}
+
+#input-wrapper > form {
+    margin: 0;
+}
+
+#input {
+    background: none;
+    border: none;
+    border-bottom: 2px solid;
+    padding: 5px;
+    border-radius: 2px;
+    width: 50%;
+}
+
+#tip {
+    margin: 0;
+    font-size: 14px;
+    color: #ff6d6b;
+}
+
+#result-list > li {
+    list-style: none;
+    padding: 15px;
+    width: 50%;
+    margin: auto;
+}
+
+#result-list > li >img {
+    vertical-align: middle;
+}
+
+.el-icon {
+    height: 30px;
+}
