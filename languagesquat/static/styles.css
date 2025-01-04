@@ -1,0 +1,57 @@
+#lang-selection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* This will spread the buttons evenly */
+  align-items: flex-start; /* Align to the start to avoid stretching */
+}
+
+/* Style for the buttons */
+#lang-selection .lang-option {
+  flex-grow: 1; /* Allow buttons to grow */
+  margin: 0 4px; /* Provide some spacing between buttons */
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+/* Pseudo-element to push the last line of buttons */
+#lang-selection::after {
+  content: '';
+  flex-grow: 1000000; /* Large growth factor to push elements */
+  min-width: 0.1px; /* Prevents the pseudo-element from being too big */
+}
+
+/* Optional: media query for smaller screens to prevent buttons from being too wide */
+@media (max-width: 600px) {
+  #lang-selection .button {
+    flex-basis: 50%; /* Minimum initial width */
+  }
+}
+
+.lang-option > button {
+  padding: 0;
+}
+
+.lang-option > button > div {
+  padding: 5px !important;
+  text-align: center;
+}
+
+.popup {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: opacity 0.5s ease-out;
+}
+
+.popup.green {
+  background-color: green;
+}
+
+.popup.red {
+  background-color: red;
+}
