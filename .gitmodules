@@ -1,0 +1,3 @@
+[submodule "languagesquat"]
+	path = languagesquat
+	url = git@github.com:nov3o/languagesquat.git
