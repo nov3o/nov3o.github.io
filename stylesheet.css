@@ -134,20 +134,20 @@ span.highlight {
   background-color: #ffffd0;
 }
 
-    #news-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-family: Arial, sans-serif;
-        margin-top: 20px;
-    }
+#news-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  margin-top: 20px;
+}
 
-    #news-table td {
-        border-bottom: 1px solid #ddd;
-        padding: 10px 15px;
-        text-align: left;
-    }
+#news-table td {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 15px;
+  text-align: left;
+}
 
 
-    #news-table tr:last-child td {
-        border-bottom: none;
-    }
+#news-table tr:last-child td {
+  border-bottom: none;
+}
