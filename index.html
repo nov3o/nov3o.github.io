@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/International_Baccalaureate_Logo.svg/1024px-International_Baccalaureate_Logo.svg.png">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   </head>
   <body>
     <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
@@ -20,11 +22,11 @@
                     <p class="name" style="text-align: center;">
                       Ilia Badanin
                     </p>
-		    <p>I am currently pursuing my Master’s in Data Science at <a href="https://epfl.ch/">École Polytechnique Fédérale de Lausanne (EPFL)</a>, where I continue to expand my expertise in machine learning. My academic journey began with a Bachelor of Science from the <a href="https://bmstu.ru/">Bauman Moscow State Technical University (BMSTU)</a>, where I developed a strong foundation in these fields.</p>
+		    <p>I am currently pursuing my Master's in Data Science at <a href="https://epfl.ch/">École Polytechnique Fédérale de Lausanne (EPFL)</a>, where I continue to expand my expertise in machine learning. I was fortunate to have an exchange semester at <a href="https://ethz.ch/">ETH Zurich</a>. My academic journey began with a Bachelor of Science from the <a href="https://bmstu.ru/">Bauman Moscow State Technical University (BMSTU)</a>, where I developed a strong foundation in these fields.</p>
 
 		    <p>During my undergraduate studies, I had the opportunity to spend an exchange semester at EPFL, where I completed my Bachelor's thesis under the guidance of <a href="https://scholar.google.com/citations?user=r1TJBr8AAAAJ&hl=en">Prof. Martin Jaggi</a>. My thesis focused on multiplication-free neural networks, exploring cutting-edge approaches for computational efficiency. Additionally, I contributed to research at <a href="https://www.epfl.ch/labs/cvlab/">CVLab</a>, improving human pose estimation methods and gaining practical experience in advanced computer vision techniques.</p>
 
-		    <p>More recently, I have worked on multilingual large language model interpretability under the mentorship of  <a href="https://scholar.google.com/citations?user=5CPQWo8AAAAJ&hl=de">Chris Wendler</a>, deepening my understanding of natural language processing and interpretability challenges. I also collaborated with the <a href="https://www.swiss-ai.org/">Swiss AI Initiative</a>, working with <a href="https://scholar.google.com/citations?user=nFQJEskAAAAJ&hl=en">Imanol Schlag</a> on the Swiss LLM. These experiences have further honed my skills and solidified my passion for cutting-edge research in AI.</p>
+		    <p>More recently, I have worked on multilingual large language model interpretability under the mentorship of <a href="https://scholar.google.com/citations?user=5CPQWo8AAAAJ&hl=de">Chris Wendler</a>, deepening my understanding of natural language processing and interpretability challenges. I also collaborated with the <a href="https://www.swiss-ai.org/">Swiss AI Initiative</a>, working with <a href="https://scholar.google.com/citations?user=nFQJEskAAAAJ&hl=en">Imanol Schlag</a> on the Swiss LLM. Additionally, I worked with <a href="https://scholar.google.com/citations?user=Bhgm1tQAAAAJ&hl=en">Xiaozhe Yao</a> on heterogeneous LLM serving and with <a href="https://scholar.google.com/citations?user=Fx50TZQAAAAJ&hl=en">Alessandro Stolfo</a> on interpretability and subliminal learning. These experiences have further honed my skills and solidified my passion for cutting-edge research in AI.</p>
                     <p style="text-align:center">
                       <a href="mailto:badanin.ilia@gmail.com">Email</a> &nbsp;/&nbsp;
                       <a href="https://scholar.google.com/citations?hl=en&user=NFC3NTMAAAAJ">Scholar</a> &nbsp;/&nbsp;
@@ -44,6 +46,10 @@
 		  <td width="67%" valign="middle">
 		    <p></p><h2>News</h2>
 		    <ul>
+		      <li>
+			<b>[Jan 2026]</b> Published a preprint on <a href="https://arxiv.org/abs/2601.12549">Concept Spilling</a> benchmarking in multilingual LLMs.<br>
+		      </li>
+
 		      <li>
 			<b>[Dec 2025]</b> Submitted a paper at <a href="https://www.usenix.org/conference/osdi26">OSDI 2026</a> as co-author.<br>
 		      </li>
@@ -98,10 +104,7 @@
 	      <tbody>
 		<tr>
 		  <td style="padding:20px;width:100%;vertical-align:middle">
-		    <h2>Research</h2>
-		    <p>
-		      I have a background in computer vision and optimization. I am deeply interested in diffusion models. During my PhD, I plan to further explore this innovative AI technology. I'm motivated by its potential to transform how generative models are applied in real-world scenarios.
-		    </p>
+		    <h2>Publications</h2>
 		  </td>
 		</tr>
 	      </tbody>
@@ -111,29 +114,93 @@
 	      >
 	      <tbody>
 		<tr>
-		  <td style="padding:20px;width:25%;vertical-align:middle">
+		  <td style="padding:20px;width:25%;vertical-align:middle;text-align:center">
+		    <div class="one">
+		      <img src='publications/assets/concept-spilling.png' width="160">
+		    </div>
+		  </td>
+		  <td style="padding:20px;width:75%;vertical-align:middle">
+		    <a href="publications/concept-spilling.html">
+		      <span class="papertitle">Benchmarking Concept-Spilling Across Languages in LLMs</span>
+		    </a>
+		    <br>
+		    <strong>Ilia Badanin</strong>, Daniil Dzenhaliou, Imanol Schlag
+		    <br>
+		    <em>arXiv preprint</em>, 2026
+		    <br>
+		    <i class="ai ai-arxiv"></i> <a href="https://arxiv.org/abs/2601.12549">arXiv</a> / <i class="fas fa-file-pdf"></i> <a href="https://arxiv.org/pdf/2601.12549">PDF</a>
+		    <p></p>
+		    <p>
+		      We investigate "language spilling"—a phenomenon where multilingual LLMs exhibit systematic bias toward dominant language representations. We developed a comparative framework that ranks models based on when they resort to dominant-language meanings: stronger models produce more target-language meanings before failing, while weaker models resort to foreign meanings earlier. Results across nine languages and 100 high-polysemy words revealed significant variation in semantic robustness.
+		    </p>
+		  </td>
+		</tr>
+
+		<tr>
+		  <td style="padding:20px;width:25%;vertical-align:middle;text-align:center">
+		    <div class="one">
+		      <img src='publications/assets/llmfabric.png' width="160">
+		    </div>
+		  </td>
+		  <td style="padding:20px;width:75%;vertical-align:middle">
+		    <a href="publications/llmfabric.html">
+		      <span class="papertitle">LLMFabric: Unifying Decentralized HPC Clusters for Heterogeneous LLM Serving</span>
+		    </a>
+		    <br>
+		    Xiaozhe Yao, Youhe Jiang, <strong>Ilia Badanin</strong>, Qinghao Hu, Binhang Yuan, Eiko Yoneki, Imanol Schlag, Ana Klimovic
+		    <br>
+		    <em>Under review at OSDI</em>, 2026
+		    <br>
+		    <i class="fas fa-file-pdf"></i> <a href="publications/llmfabric.pdf">PDF</a>
+		    <p></p>
+		    <p>
+		      LLMFabric is a decentralized serving system that turns existing Slurm-managed HPC clusters into a shared, cross-institutional inference platform. It layers a unified API over diverse serving engines and heterogeneous hardware, using a peer-to-peer gossip network for service discovery and fault-tolerant routing. The heterogeneity-aware scheduler jointly decides model placement and parallelism strategies across mixed GPU types. In continuous operation for over 16 months serving 13 million requests and 15 billion tokens over 142 models to 500+ researchers.
+		    </p>
+		  </td>
+		</tr>
+
+		<tr>
+		  <td style="padding:20px;width:25%;vertical-align:middle;text-align:center">
+		    <div class="one">
+		      <img src='publications/assets/apertus.png' width="160">
+		    </div>
+		  </td>
+		  <td style="padding:20px;width:75%;vertical-align:middle">
+		    <a href="publications/apertus.html">
+		      <span class="papertitle">Apertus: Democratizing Open and Compliant LLMs for Global Language Environments</span>
+		    </a>
+		    <br>
+		    Alejandro Hernández-Cano, ... <strong>Ilia Badanin</strong> ... Imanol Schlag
+		    <br>
+		    <em>arXiv preprint</em>, 2025
+		    <br>
+		    <i class="ai ai-arxiv"></i> <a href="https://arxiv.org/abs/2509.14233">arXiv</a> / <i class="fas fa-file-pdf"></i> <a href="https://arxiv.org/pdf/2509.14233">PDF</a>
+		    <p></p>
+		    <p>
+		      The biggest European open-source LLM addressing data compliance and multilingual support. Trained on 15 trillion tokens across 1,800+ languages (40% non-English) with retroactive robots.txt compliance. Available in 8B and 70B parameters. <strong>I was responsible for evaluations and post-training.</strong> Releases include all scientific artifacts: data preparation scripts, checkpoints, evaluation suites, and training code.
+		    </p>
+		  </td>
+		</tr>
+
+		<tr>
+		  <td style="padding:20px;width:25%;vertical-align:middle;text-align:center">
 		    <div class="one">
 		      <img src='images/occlusion.jpg' width="160">
 		    </div>
 		  </td>
 		  <td style="padding:20px;width:75%;vertical-align:middle">
-		    <a href="">
+		    <a href="publications/occlusion.html">
 		      <span class="papertitle">Occlusion Resilient 3D Human Pose Estimation</span>
 		    </a>
 		    <br>
-		    <a href="https://scholar.google.com/citations?user=BIIrpRoAAAAJ&hl=en">Soumava Kumar Roy</a>,
-		    <a href="/"><strong>Ilia Badanin</strong></a>, 
-		    <a href="https://sinahonari.github.io/">Sina Honari</a>,
-		    <a href="https://scholar.google.com/citations?user=kzFmAkYAAAAJ&hl=en">Pascal Fua</a>
+		    Soumava Kumar Roy, <strong>Ilia Badanin</strong>, Sina Honari, Pascal Fua
 		    <br>
 		    <em>International Conference on 3D Vision</em>, 2024
 		    <br>
- 		    <!-- <a href="https://cat3d.github.io/">project page</a> -->
-		    <!-- / -->
-		    <a href="https://arxiv.org/abs/2402.11036">arXiv</a>
+		    <i class="ai ai-arxiv"></i> <a href="https://arxiv.org/abs/2402.11036">arXiv</a> / <i class="fas fa-file-pdf"></i> <a href="https://arxiv.org/pdf/2402.11036">PDF</a>
 		    <p></p>
 		    <p>
-		      We employ Graph Convolutional Networks to improve human pose estimation from the video sequence.
+		      We address occlusion challenges in 3D body pose estimation from single-camera video sequences by representing the deforming body as a spatio-temporal graph. Our refinement network performs graph convolutions to output 3D poses. To ensure robustness, we train with binary masks that disable edges (similar to drop-out techniques), simulating hidden joints for periods of time and training the network to be immune to occlusions.
 		    </p>
 		  </td>
 		</tr>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Benchmarking Concept-Spilling Across Languages in LLMs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" type="text/css" href="publication-page.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="back-link">
+        <a href="../index.html">← Back to Home</a>
+      </div>
+
+      <h1>Benchmarking Concept-Spilling Across Languages in LLMs</h1>
+
+      <div class="authors">
+        <strong>Ilia Badanin</strong>, Daniil Dzenhaliou, Imanol Schlag
+      </div>
+
+      <div class="venue">
+        arXiv preprint arXiv:2601.12549, 2026
+      </div>
+
+      <div class="links">
+        <a href="https://arxiv.org/abs/2601.12549"><i class="ai ai-arxiv"></i> arXiv</a>
+        <a href="https://arxiv.org/pdf/2601.12549"><i class="fas fa-file-pdf"></i> PDF</a>
+      </div>
+
+      <div class="main-image">
+        <img src="assets/concept-spilling.png" alt="Concept Spilling Overview">
+      </div>
+
+      <h2>Abstract</h2>
+      <div class="abstract">
+        <p>
+          The paper investigates "language spilling"—a phenomenon where multilingual LLMs exhibit systematic bias toward dominant language representations when generating content in non-English languages.
+        </p>
+        <p>
+          The researchers developed a comparative framework measuring how models handle polysemous words across languages. Their methodology ranks model performance based on when they resort to dominant-language meanings: stronger models produce more target-language meanings before failing, while weaker models resort to foreign meanings earlier in generation sequences.
+        </p>
+        <p>
+          The study evaluated multiple open and closed multilingual LLMs across nine languages using a structured meaning generation task on 100 high-polysemy English words. Results revealed significant variation in semantic robustness across models and languages, providing a ranking system without requiring definitive error attribution. The work contributes both a scalable comparative benchmark for multilingual semantic evaluation and validation methods for developing more linguistically balanced AI systems.
+        </p>
+      </div>
+
+      <h2>BibTeX</h2>
+      <div class="bibtex">@misc{badanin2026benchmarkingconceptspillinglanguagesllms,
+  title={Benchmarking Concept-Spilling Across Languages in LLMs},
+  author={Ilia Badanin and Daniil Dzenhaliou and Imanol Schlag},
+  year={2026},
+  eprint={2601.12549},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL},
+  url={https://arxiv.org/abs/2601.12549},
+}</div>
+    </div>
+
+    <script>
+      function toggleAuthors() {
+        const shortForm = document.getElementById('authors-short');
+        const fullForm = document.getElementById('authors-full');
+
+        if (shortForm.style.display === 'none') {
+          shortForm.style.display = 'inline';
+          fullForm.style.display = 'none';
+        } else {
+          shortForm.style.display = 'none';
+          fullForm.style.display = 'inline';
+        }
+      }
+    </script>
+  </body>
+</html>

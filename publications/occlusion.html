@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Occlusion Resilient 3D Human Pose Estimation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" type="text/css" href="publication-page.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="back-link">
+        <a href="../index.html">← Back to Home</a>
+      </div>
+
+      <h1>Occlusion Resilient 3D Human Pose Estimation</h1>
+
+      <div class="authors">
+        Soumava Kumar Roy, <strong>Ilia Badanin</strong>, Sina Honari, Pascal Fua
+      </div>
+
+      <div class="venue">
+        International Conference on 3D Vision (3DV), 2024
+      </div>
+
+      <div class="links">
+        <a href="https://arxiv.org/abs/2402.11036"><i class="ai ai-arxiv"></i> arXiv</a>
+        <a href="https://arxiv.org/pdf/2402.11036"><i class="fas fa-file-pdf"></i> PDF</a>
+      </div>
+
+      <div class="main-image">
+        <img src="../images/occlusion.jpg" alt="Occlusion Resilient 3D Human Pose Estimation">
+      </div>
+
+      <h2>Abstract</h2>
+      <div class="abstract">
+        <p>
+          Occlusions remain one of the key challenges in 3D body pose estimation from single-camera video sequences. Temporal consistency has been extensively used to mitigate their impact but the existing algorithms in the literature do not explicitly model them. Here, we apply this by representing the deforming body as a spatio-temporal graph. We then introduce a refinement network that performs graph convolutions over this graph to output 3D poses. To ensure robustness to occlusions, we train this network with a set of binary masks that we use to disable some of the edges as in drop-out techniques. In effect, we simulate the fact that some joints can be hidden for periods of time and train the network to be immune to that. We demonstrate the effectiveness of this approach compared to state-of-the-art techniques that infer poses from single-camera sequences.
+        </p>
+      </div>
+
+      <h2>BibTeX</h2>
+      <div class="bibtex">@misc{roy2024occlusionresilient3dhuman,
+  title={Occlusion Resilient 3D Human Pose Estimation},
+  author={Soumava Kumar Roy and Ilia Badanin and Sina Honari and Pascal Fua},
+  year={2024},
+  eprint={2402.11036},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV},
+  url={https://arxiv.org/abs/2402.11036},
+}</div>
+    </div>
+
+    <script>
+      function toggleAuthors() {
+        const shortForm = document.getElementById('authors-short');
+        const fullForm = document.getElementById('authors-full');
+
+        if (shortForm.style.display === 'none') {
+          shortForm.style.display = 'inline';
+          fullForm.style.display = 'none';
+        } else {
+          shortForm.style.display = 'none';
+          fullForm.style.display = 'inline';
+        }
+      }
+    </script>
+  </body>
+</html>
