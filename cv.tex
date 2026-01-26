@@ -1,0 +1,454 @@
+%-------------------------
+% Resume in Latex
+% Author : Sourabh Bajaj + some brand new features from Mary Feofanova
+% Website: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{makecell}
+\usepackage[link=off]{phonenumbers}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[pdftex]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{fontawesome5}
+\usepackage{graphicx} 
+\usepackage{fontawesome}
+\usepackage{academicons}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\usepackage[margin=0.15in]{geometry}
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.0in}
+\addtolength{\evensidemargin}{-0.0in}
+\addtolength{\textwidth}{0in}
+\addtolength{\topmargin}{0pt}
+\addtolength{\textheight}{0.0in}
+
+\urlstyle{same}
+
+\usepackage{xcolor}% http://ctan.org/pkg/xcolor
+\usepackage{hyperref}% http://ctan.org/pkg/hyperref
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!50!red,
+  linkbordercolor=red,
+  urlcolor=blue!70!black
+}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-10pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+\def \ifempty#1{\def\temp{#1} \ifx\temp\empty }
+
+\newcommand{\resumeItem}[2]{
+  \item\small{
+  	\ifempty{#1}#2\else\textbf{#1}{: #2 \vspace{-2pt}}\fi
+  }
+}
+
+\definecolor{mygray}{gray}{0}
+
+\usepackage{lmodern}
+\usepackage{tikz}
+
+\tikzset{rndblock/.style={rounded corners,rectangle,draw,outer sep=0pt}}
+
+\newcommand{\tframed}[2][]{\tikz[baseline=(h.base)]\node[rndblock,#1] (h) {\color{black}{#2}};}
+
+\newcommand*{\mystrut}{\rule[-0.2\baselineskip]{0pt}{0.8\baselineskip}}
+\newcommand{\skill}[1]{\tframed[lightgray]{\mystrut#1}}
+
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textcolor{mygray}{\it #2} \\
+      \textit{\small#3} & \textcolor{mygray}{\text{\small #4}} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeExpSubheading}[5]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textbf{#1}  & \textcolor{mygray}{#2} \\
+      \textit{\small#3} & \textcolor{mygray}{} \\
+      {\vspace{-15pt}}
+    \end{tabular*}\vspace{2pt}
+}
+
+\newcommand{\resumeExperienceBlock}[5]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textbf{#1}  & \textcolor{mygray}{\it #2} \\
+      \textit{\small#3} & \textcolor{mygray}{#4} \\
+      {\scriptsize#5}
+    \end{tabular*}\vspace{2pt}
+}
+
+\newcommand{\resumeProjSubheading}[3]{
+  \vspace{-5pt}
+  \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textbf{#1} &  \textcolor{mygray}{#2} 
+      \textcolor{mygray} \\
+    \end{tabular*}
+   \vspace{4pt}
+}
+
+\renewcommand{\labelitemii}{$\circ$}
+
+\newcommand{\resumeSubHeadingListStart}{\vspace{5pt}\begin{itemize}[leftmargin=*]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.2in]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\newcommand{\hrefc}[2]{\href{#1}{#2\,\faExternalLink}}
+
+\usepackage{changepage}
+\newcommand{\resumeDesc}[1]{\begin{adjustwidth}{0pt}{0pt}\vspace{-4pt}{\small{#1}}\end{adjustwidth}}
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+
+%----------Heading-----------------
+% \begin{s
+
+
+\begin{minipage}[t]{1\textwidth}
+% \begin{minipage}[t]{1\textwidth}
+  \vspace{2pt}
+  \begin{center}
+    {\Huge \scshape Ilia Badanin}
+    \\
+    % \small \raisebox{-0.1\height}\faPhone\ +41 76 798 20 76
+    ~ \href{mailto:ilya.badaneen@gmail.com}{\raisebox{-0.2\height}\faEnvelope\  \underline{ilya.badaneen@gmail.com}}
+    ~ \href{https://github.com/nov3o}{\raisebox{-0.2\height}\faGithub\ \underline{nov3o}} \\
+    % \faMapMarker Lausanne, Switzerland \ \
+    \href{https://www.linkedin.com/in/ilia-badanin/}{\raisebox{-0.2\height}\faLinkedin\ \underline{ilia-badanin}}
+    ~ \href{https://nov3o.github.io/}{\raisebox{-0.2\height}\faGlobe\ \underline{nov3o.github.io}}  \vspace{2pt} \\
+  \end{center}
+% Strong background in computer vision, optimization, and leading technical teams to deliver impactful results. Endurance athlete driven by resilience and discipline. Passionate about neuroplasticity, continually learning languages, recognizing 40+ alphabets, and mastering two keyboard layouts. Admirer of Chopin and Tchaikovsky, blending analytical precision with creative expression.
+\end{minipage}%
+% \begin{minipage}[t]{0.2\textwidth}
+%   \vspace{0pt} % Top align the minipage
+%   \raggedleft % Right align the image
+%   \includegraphics[height=1.3in]{prof-photo}
+% \end{minipage}
+
+%-----------Education-----------------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeExperienceBlock
+        {ETH Zürich}{Zürich, Switzerland}
+        {Exchange student in Informatics}{Sep. 2025 - Feb. 2026}
+        {\vspace{-15pt}}
+    \vspace{-10pt}
+    \resumeSubheading
+        {EPFL}{Lausanne, Switzerland}
+        {Data Science MSc}{Sep. 2024 – Jul. 2026}
+        {\vspace{-15pt}}
+    \vspace{10pt}
+    \resumeSubheading
+        {Bauman Moscow State Technical University}{Moscow, Russia}
+        {Bachelor's Degree, \textbf{GPA: 3.98/4}, highest GPA on a program (out of 100 students)}{Sep. 2018 - Jul. 2023}
+        {\vspace{-15pt}}
+    \vspace{10pt}
+    \resumeExperienceBlock
+        {EPFL}{Lausanne, Switzerland}
+        {Exchange student. Researched at two top-ranked labs: CVLab and MLO Lab}{Feb. 2022 - Aug. 2022}
+        {\vspace{-15pt}}
+  \resumeSubHeadingListEnd
+  
+
+% -----------EXPERIENCE-----------------
+\section{Experience}   
+  \resumeSubHeadingListStart
+    \resumeExperienceBlock
+    {ETH AI Center}{Zurich, Switzerland}
+    {AI Engineer}
+    {Mar. 2025 - Aug. 2025}
+    {\vspace{-15pt}}
+    \resumeDesc{
+I contributed to building an open-source Swiss LLM. I created a human labeling platform that \textbf{collected 4,000+ annotations} to improve automated classification, \textbf{analyzed 34 TB} of data, and \textbf{built an LLM Arena} to benchmark checkpoints and external models. The Swiss LLM, Apertus, is \textbf{the biggest} European Open-Source LLM, trained from scratch on \textbf{1800+} languages, subsequently appearing in \textbf{Top 10 of the Hugging Face} Trending Model leaderboard.
+}
+
+    \resumeExperienceBlock
+    {dlab, EPFL}{Lausanne, Switzerland}
+    {NLP Research Project Student}
+    {Aug. 2024 - Sep. 2025}
+    {\vspace{-15pt}}
+    \resumeDesc{
+    % \begin{itemize}
+    %     \item \hrefc{https://meaningless-eta.vercel.app/}{Our Current Work}
+    %     \item \textbf{Research Focus:} My research focused on exploring multilingual LLMs and the phenomenon of language spilling—how a model may address concepts in one language, even when asked in another.
+    %     \item \textbf{Importance:} Language spilling in LLMs can lead to incorrect meanings of concepts and may even cause the model to hallucinate facts borrowed from other languages.
+    %     \item \textbf{Methods Employed:} To verify this, I explored language spilling across different languages and models. I then used LogitLens to analyze the generation process and understand why the output deviated from expectations.    
+    % \end{itemize}
+    Created a benchmark for multilingual LLMs, analyzing how models work with concepts from different languages to find factual inconsistencies and hallucinations across languages. \textbf{Under review for ACL Rolling Review 2025}.
+    }
+
+    \resumeExperienceBlock
+    {Machine Learning and Optimization Lab, EPFL}{Lausanne, Switzerland}
+    {Deep Learning Researcher}
+    % {Jul. 2022 - Sep. 2022; Apr. 2023 - Nov. 2023}
+    {Jul. 2022 - Nov. 2023}
+    {\vspace{-15pt}}
+    \resumeDesc{
+    % \begin{itemize}
+    %     \item \textbf{Research Focus:} My research primarily focused on the development of multiplication-free neural network under the supervision of prof. Martin Jaggi \href{https://scholar.google.com/citations?user=r1TJBr8AAAAJ&hl=en}{\aiGoogleScholar}, MLO Lab director
+    %     \item \textbf{Importance:} This topic holds great significance due to the growing need for neural networks to operate efficiently on low-resource devices, such as smartphones, Arduino-like devices, Raspberry Pi, and cameras with limited battery capacity. Multiplication operations consume 4 times more energy (in pJ) for floating-point numbers and 31 times more energy for integers
+    %     \item \textbf{Methods Employed:} To address these challenges, I used tropical algebra, replacement traditional multiplication and addition operations with addition and max operations. This approach significantly reduces energy consumption while maintaining remarkable accuracy in recognition and classification tasks
+    % \end{itemize}
+    Developed multiplication-free neural networks, leveraging tropical algebra to optimize neural networks for low-resource devices, reducing energy consumption by up to \textbf{31x} while maintaining high accuracy.
+    }
+    
+    \resumeExperienceBlock
+    {Computer Vision Lab, EPFL}{Lausanne, Switzerland}
+    {Computer Vision Researcher}
+    {Apr. 2022 - Nov. 2023}
+    {\vspace{-15pt}}
+    \resumeDesc{
+    % \begin{itemize}
+    %     \item \textbf{Research Focus:} I worked on enhancing pose estimation with a focus on addressing occlusions under the supervision of prof. Pascal Fua \href{https://scholar.google.ch/citations?user=kzFmAkYAAAAJ&hl=en}{\aiGoogleScholar} and postdoctoral researcher Soumava Roy \href{https://scholar.google.com/citations?user=BIIrpRoAAAAJ&hl=en}{\aiGoogleScholar}. Our work was accepted at the International Conference on 3D Vision 2024
+    %     \item \textbf{Importance:} Pose estimation is a crucial task with numerous applications, ranging from improving sports poses to precision-sensitive scenarios where even small inaccuracies can have serious consequences. This research is particularly significant in cases of occlusions, as state-of-the-art pose estimation algorithms often struggle
+    %     \item \textbf{Methods Employed:} I employed a Graph Convolutional Neural Network (GCN) for a refinement network. I implemented techniques such as joint masking in different frames of a sequence to learn the relationships between joints. I also implemented modules for the entire training pipeline
+    % \end{itemize}
+    Enhanced pose estimation by tackling occlusions using Graph Convolutional Neural Networks (GCNs). Our work was presented at the \textbf{International Conference on 3D Vision 2024}. 
+    }
+\resumeSubHeadingListEnd
+
+%-----------Projects-----------------
+\section{Projects}
+    \resumeSubHeadingListStart
+
+% \resumeProjSubheading
+  % {Open Source Contribution} 
+  % {Sep. 2025}
+  % \resumeDesc{
+  % \vspace{-5pt}
+  % Pushed a feature for an open-source ebooks reader \hrefc{https://github.com/johnfactotum/foliate/pull/1578}{Foliate}
+  % }
+
+\resumeProjSubheading
+  {\hrefc{https://textocal.vercel.app/}{Textocal} (Personal Project)} 
+  {Mar. 2025 – Apr. 2025}
+  \resumeDesc{
+  \vspace{-5pt}
+  Developed an android application and a browser extension that extracts event-related information from text or images and adds it to the user’s calendar. Built the app \textbf{within 25 hours}. Presented the project to an audience of 50 at Lausanne \textbf{AI Tinkerers} meetup.
+  }
+    
+\resumeProjSubheading
+  {\hrefc{https://drive.google.com/file/d/1453LR94xJ3L1VQ17ha8pzgyNbWkvbz4P/view}{DynaQuant} (Class Project)} 
+  {Feb. 2025 – Mar. 2025}
+  \resumeDesc{
+  \vspace{-5pt}
+  Was an invited collaborator on the final project for \textbf{Stanford’s Reinforcement Learning course}. Contributed to the development of a quantization technique that adapts pre-trained models to downstream datasets, enabling deployment on smaller models while balancing model size and performance trade-offs.
+  }
+
+    \resumeProjSubheading
+  {NavIA (Personal project) } 
+  {Nov. 2024 – Feb. 2025}
+  \resumeDesc{
+  \vspace{-5pt} Made an AI-powered navigation app. Qualified for the \hrefc{https://www.venture.ch/}{>>venture>>}, Switzerland’s leading startup competition.
+  }
+
+    \resumeProjSubheading
+    {\hrefc{https://www.swiss-ai.org/}{Swiss AI Initiative}}{Lausanne, Switzerland}
+    {Nov. 2024 - Jan. 2025}
+    \resumeDesc{\vspace{-5pt}
+    Improved API reliability and deployment for Swiss LLMs (up to 90B parameters), added system monitoring and documentation. Built a \hrefc{https://www.linkedin.com/posts/ilia-badanin_llm-epfl-eth-activity-7282671127494029312-D2fz}{web chat interface} for seamless model access.
+    }
+    
+    \resumeProjSubheading
+  {\hrefc{https://drive.google.com/file/d/1ECrslmiJvA5S6LCh8UHIXXoY1A2FS88f/view?usp=sharing}{FolioLLM} (Class project) } 
+  {May. 2024 - Jun. 2024}
+  \resumeDesc{
+  \vspace{-5pt} Was an invited collaborator on the final project for \textbf{Stanford’s NLP in Deep Learning} course. Led a team of 3 in designing and fine-tuning a 0.5B-parameter LLM to optimize portfolio management and financial domain expertise. Oversaw strategy, solution design, and execution, ensuring high performance across both financial and NLP metrics.
+  }
+  
+  % \resumeProjSubheading
+  % {\hrefc{https://languagesquat.vercel.app/}{Language Squat} (Personal project) } 
+  % {Mar. 2024 - Apr. 2024}
+  % \resumeDesc{\vspace{-5pt} Created a language recognition tool that trains users to identify 92 different languages from audio samples}
+  
+  % \resumeProjSubheading
+  % {\href{https://github.com/nov3o/tik-tok-toe}{Tic-Tac-Toe Reinforcement Learning project} [Class project]}
+  % {Apr. 2022 - May 2022}
+  % \resumeDesc{\vspace{-5pt} Team project on Artificial Neural Networks course, with \href{https://drive.google.com/file/d/1XHJzWQq3KxENfLwrApX_5ArG-AgNX2c3/view}{report}}
+ 
+  % \resumeProjSubheading
+  % {\href{https://github.com/nov3o/bunet/}{Bunet} [Coursework project]}
+  % {Feb. 2022}
+  % \resumeDesc{\vspace{-5pt}Command-line application that connects all members of peer-to-peer network to each other using Dijkstra algorithm}
+
+  % \resumeProjSubheading
+  % {\href{https://github.com/tp-teama/p2p_messenger/}{Peer-to-peer messenger} [Class project]}
+  % {Apr. 2020 - May 2020}
+  % \resumeDesc{\vspace{-5pt}Team Project. Developed a {\href{https://github.com/tp-teama/p2p_messenger/tree/frontend-new}{command line interface} using C++, which interacts with peer-to-peer network}}
+
+  % \resumeProjSubheading
+  % {\href{https://github.com/nov3o/bundb}{Database Management System} [Personal project]}
+  % {Feb. 2019}
+  % \resumeDesc{\vspace{-5pt}After C/C++ course was excited about language and created database management system}
+
+  % \resumeProjSubheading
+  % {\href{https://github.com/nov3o/firefox-nice-dark-theme}{Ultracompact Firefox interface} [Personal project]}
+  % {Jan. 2019 - Apr 2020}
+  % \resumeDesc{\vspace{-5pt}Restyled interface of Firefox Web Browser to be much smaller and decreased size of compact theme in more than 1.5 times and was maintaining the project over 1 year}
+
+  % \resumeProjSubheading
+  % {\href{https://github.com/nov3o/Web-UVAO}{Visual Novel Game} [Personal project]}
+  % {Dec. 2017 - Feb. 2018}
+  % \resumeDesc{\vspace{-5pt}Created an engine for visual novel in web browser}
+  \resumeSubHeadingListEnd
+
+%-----------Publications-----------------
+\section{Publications}
+  \resumeSubHeadingListStart
+  \resumeProjSubheading
+    {\hrefc{https://github.com/swiss-ai/apertus-tech-report/blob/main/Apertus_Tech_Report.pdf}{Democratizing Open and Compliant LLMs for Global Language Environments}}
+    {Sep 2025}
+    \resumeDesc{\vspace{-5pt} \textit{Technical Report}}
+
+  \resumeProjSubheading
+    {Benchmarking Concept-Spilling Across Languages in LLMs}
+    {July 2025}
+    \resumeDesc{\vspace{-5pt} \textbf{First author} \textit{ARR 2025 (Under review)}}
+    
+  \resumeProjSubheading
+    {\hrefc{https://arxiv.org/abs/2402.11036}{Occlusion Resilient 3D Human Pose Estimation}}
+    {Oct. 2023}
+    \resumeDesc{\vspace{-5pt} Soumava Kumar Roy, \textbf{Ilia Badanin}, Sina Honari, Pascal Fua, \textit{International Conference on 3D Vision 2024}}
+  \resumeSubHeadingListEnd
+
+
+% --------Teaching------------
+\section{Teaching}
+\resumeSubHeadingListStart
+    \resumeProjSubheading
+    {\textbf{Section Leader}, \hrefc{https://codeinplace.stanford.edu/cip4/}{Stanford Code in Place}} 
+      {Apr. 2024 - Jun. 2024}
+      \resumeDesc{Facilitated learning for 10,000+ students in Stanford's extensive online computer science course}
+      \vspace{-5pt}
+    % \resumeProjSubheading
+    % {TA on a Data Analysis course in Bauman MSTU}
+    %   {Fall 2021}
+    %   \resumeDesc{}
+    %   \vspace{-20pt}
+    % \resumeProjSubheading
+    %   {Former co-organiser of \hrefc{https://t.me/BeBraveMoscowLE}{BlaBla Language Exchange}}{Fall 2021}
+    %   \resumeDesc{}
+  \resumeSubHeadingListEnd
+  
+    
+%-----------Achievements-----------------
+\section{Achievements and Awards}
+\resumeSubHeadingListStart
+    % \resumeProjSubheading{BPuzzled}{Nov. 2024}
+    % \resumeDesc{\vspace{-5pt} Got \textbf{5/14 place} at  the BPuzzled challenge organized by Bloomberg at EPFL}
+
+    % \resumeProjSubheading{CVPR Submission}{Nov. 2022}
+    % \resumeDesc{\vspace{-5pt}Submitted a paper at CVPR, top-1 conference in Computer Vision, making me \textbf{the first among bachelor students in my university} to submit at such a regarded conference, but got a rejection and successfully resubmitted at 3DV}
+    
+    \resumeProjSubheading{Ironman 70.3}{Aug. 2022}
+    \resumeDesc{\vspace{-5pt}Completed Ironman 70.3 challenge along Léman lake. 2 km of swimming, 90 km of bike riding and 21 km of running in 9 hours}
+
+    % \resumeProjSubheading{EPFL Scholarship}{Mar. 2022}
+    % \resumeDesc{\vspace{-5pt}}
+        
+    \resumeProjSubheading{Google Hashcode}{Feb. 2022}
+    \resumeDesc{\vspace{-5pt}Reached \textbf{16\% worldwide}, top 5th team out of 32 in local hub}
+
+    \resumeProjSubheading{Full-ride academic scholarship for bachelor’s degree duration}{Feb. 2022}
+    \resumeDesc{\vspace{-5pt} Awarded for exceptional academic performance at BMSTU, distinguishing me among just \textbf{6 recipients from 120 students} in the program}
+    
+    % \resumeProjSubheading{Yandex Cup finalist}{Sep. 2021}
+    % \resumeDesc{\vspace{-5pt}\textbf{Finalist} in Yandex Cup competition in Algorthms section}
+    
+    % \resumeProjSubheading{BEST Hack - II place [Hackathon]}{Apr. 2020}
+    % \resumeDesc{\vspace{-5pt}Developed Help Desk frontend for web app in a team. Used TypeScript and React that I \textbf{learned in 2 months}}
+\resumeSubHeadingListEnd  
+
+%% --------Courses------------
+% \section{Additional Courses}
+% \resumeSubHeadingListStart
+%     % \resumeProjSubheading
+%     % {\href{https://drive.google.com/file/d/1Y5J1a3iaCVbPNc1Cy8unwZfnu3nTHsGF/view}{Analytics and Data Science Summer School @ HSE}}
+%     %   {Aug. 2023}
+%     %   \resumeDesc{}
+%     %   \vspace{-20pt}
+%     \resumeProjSubheading
+%       {Applied Machine Learning Days Workshops @ EPFL}{Aug. 2023}
+%       \resumeDesc{}
+%       \vspace{-20pt}
+%     \resumeProjSubheading
+%       {Oxford Machine Learning Summer School}
+%       {Jul. 2023}
+%       \resumeDesc{}
+%       \vspace{-20pt}
+%     % \resumeProjSubheading
+%     %   {\href{https://drive.google.com/file/d/173txOlyXkHu1l3hRzE-40A46S-jKoSsC/view?usp=sharing}{International Winter School on Software Engineering @ HSE}}
+%     %   {Feb. 2022}
+%     %   \resumeDesc{}
+%     %   \vspace{-20pt}
+%     \resumeProjSubheading
+%       {QMUL Intelligent Sensing Winter School}
+%       {Dec. 2021}
+%       \resumeDesc{}
+%       \vspace{-20pt}
+%     % \resumeProjSubheading
+%     %   {Artificial Intelligence Intensive Course}
+%     %   {Oct. 2021 - Nov. 2021}
+%     %   \resumeDesc{}
+%     %   \vspace{-20pt}
+%     % \resumeProjSubheading
+%     %   {Technopark@Mail.ru Software Engineering Course (acceptance rate 9\%)}
+%     %   {Feb. 2020 - May. 2020}
+%     %   \resumeDesc{}
+%     %   \vspace{-20pt}
+%     % \resumeProjSubheading
+%     %   {Technopark@Mail.ru Big Data Course}
+%     %   {Sep. 2019 - Dec. 2019}
+%     %   \resumeDesc{}
+%   \resumeSubHeadingListEnd
+
+
+% --------Skills------------
+\section{Skills}
+ \resumeSubHeadingListStart
+   % \item{
+   %   \textbf{Programming Languages}: Python, C++, JavaScript, TypeScript, SQL
+   % }
+   % \vspace{-7pt}
+   \item{
+     \textbf{Skills}: PyTorch, Python, C++.
+   }
+   \vspace{-7pt}
+   \item{
+   \textbf{Languages}: English (C1), French (B2), German (A1), Russian (Native)
+   }
+ \resumeSubHeadingListEnd
+
+\end{document}

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>LLMFabric: Unifying Decentralized HPC Clusters for Heterogeneous LLM Serving</title>
+    <title>OpenFabric: Unifying Decentralized HPC Clusters for Heterogeneous LLM Serving</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../stylesheet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -14,14 +14,14 @@
         <a href="../index.html">← Back to Home</a>
       </div>
 
-      <h1>LLMFabric: Unifying Decentralized HPC Clusters for Heterogeneous LLM Serving</h1>
+      <h1>OpenFabric: Unifying Decentralized HPC Clusters for Heterogeneous LLM Serving</h1>
 
       <div class="authors">
         Xiaozhe Yao, Youhe Jiang, <strong>Ilia Badanin</strong>, Qinghao Hu, Binhang Yuan, Eiko Yoneki, Imanol Schlag, Ana Klimovic
       </div>
 
       <div class="venue">
-        Under review at OSDI 2026
+        2026
       </div>
 
       <div class="links">
@@ -29,22 +29,21 @@
       </div>
 
       <div class="main-image">
-        <img src="assets/llmfabric.png" alt="LLMFabric System Architecture">
+        <img src="assets/llmfabric.png" alt="OpenFabric System Architecture">
       </div>
 
       <h2>Abstract</h2>
       <div class="abstract">
         <p>
-          Sovereign AI initiatives increasingly rely on federated, heterogeneous GPU clusters, yet these environments are optimized for long-running batch jobs rather than the interactive, multi-tenant workloads of modern LLM serving. LLMFabric is a decentralized serving system that turns existing Slurm-managed HPC clusters into a shared, cross-institutional inference platform. It layers a unified API over diverse serving engines (e.g., vLLM, SGLang) and heterogeneous hardware, using a peer-to-peer gossip network with a CRDT-based registry for service discovery, health monitoring, and fault-tolerant routing. We design a heterogeneity-aware scheduler that jointly decides model placement and parallelism strategies across mixed GPU types using a simulator to estimate execution time and constraint programming to balance latency and resource utilization goals. LLMFabric has been in continuous operation for over 16 months serving more than 13 million requests and 15 billion tokens over 142 models to over 500 researchers across multiple institutions. We open-source LLMFabric and will release anonymized traces to support future research on LLM serving system design.
+          Sovereign AI initiatives increasingly rely on federated, heterogeneous GPU clusters, yet these environments are optimized for long-running batch jobs rather than the interactive, multi-tenant workloads of modern LLM serving. OpenFabric is a decentralized serving system that turns existing Slurm-managed HPC clusters into a shared, cross-institutional inference platform. It layers a unified API over diverse serving engines (e.g., vLLM, SGLang) and heterogeneous hardware, using a peer-to-peer gossip network with a CRDT-based registry for service discovery, health monitoring, and fault-tolerant routing. We design a heterogeneity-aware scheduler that jointly decides model placement and parallelism strategies across mixed GPU types using a simulator to estimate execution time and constraint programming to balance latency and resource utilization goals. OpenFabric has been in continuous operation for over 16 months serving more than 13 million requests and 15 billion tokens over 142 models to over 500 researchers across multiple institutions. We open-source OpenFabric and will release anonymized traces to support future research on LLM serving system design.
         </p>
       </div>
 
       <h2>BibTeX</h2>
-      <div class="bibtex">@misc{yao2026llmfabric,
-  title={LLMFabric: Unifying Decentralized HPC Clusters for Heterogeneous LLM Serving},
+      <div class="bibtex">@misc{yao2026openfabric,
+  title={OpenFabric: Unifying Decentralized HPC Clusters for Heterogeneous LLM Serving},
   author={Yao, Xiaozhe and Jiang, Youhe and Badanin, Ilia and Hu, Qinghao and Yuan, Binhang and Yoneki, Eiko and Schlag, Imanol and Klimovic, Ana},
-  year={2026},
-  note={Under review at OSDI 2026}
+  year={2026}
 }</div>
     </div>
 
