@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Open-source work · Ilia Badanin</title>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css">
+  <style>
+    body{margin:0;padding:0 16px}
+    main{max-width:760px;margin:40px auto}
+    h1{font-weight:400;margin-bottom:4px}
+    h2{margin-top:32px;margin-bottom:6px}
+    .meta{color:#666;margin-top:0}
+    .nums{background:#f6f6f6;border-left:3px solid #1772d0;padding:6px 12px;margin:8px 0}
+    p,li{line-height:1.55}
+  </style>
+</head>
+<body>
+<main>
+  <p><a href="../index.html">&larr; Ilia Badanin</a></p>
+  <h1>What I've built in open source</h1>
+  <p class="meta">November 2026</p>
+  <p>A short list of my open-source work on LLM tooling, mostly in Hugging Face <a href="https://github.com/huggingface/tokenizers">tokenizers</a> and <a href="https://github.com/huggingface/transformers">transformers</a>. Every speedup below keeps the output identical to the original code, and each one links to the benchmarks.</p>
+
+  <h2>1. Faster BPE training in tokenizers</h2>
+  <p>Training a BPE tokenizer with HF tokenizers is slow on large corpora, and especially slow on languages like Chinese. Yikai Liao's parallel trainer (<a href="https://github.com/huggingface/tokenizers/pull/2501">#2501</a>) is fast but about 14,500 lines. I wrote a compact version, about 470 lines, that keeps the three ideas the speed comes from: fixed slot coordinates, lazily checked per-pair occurrence lists, and ordered-prefix batching of merges. The vocab and merges are byte-identical to the stock trainer.</p>
+  <div class="nums">vs tokenizers <code>main</code>: <b>3.5&ndash;19x</b> faster end to end, <b>9&ndash;26x</b> on the training step alone, <b>54&ndash;61%</b> less peak memory. Yikai's own harness, 512 MiB corpora (code, English, Chinese), vocab 100k, 8 workers.</div>
+  <p><a href="https://github.com/huggingface/tokenizers/pull/2541">PR #2541</a> &middot; <a href="https://github.com/Yikai-Liao/tokenizers-bpe-benchmarks">benchmark harness</a></p>
+
+  <h2>2. Encoding one long text on every core, and streaming files</h2>
+  <p>HF tokenizers encodes a single long input on one thread, and encoding a big file from Python means loading it into one string and building per-token objects, which costs gigabytes of RAM. I split long inputs at safe points and encode the pieces in parallel. A new <code>Tokenizer.encode_file()</code> streams a file: Rust threads read it with <code>pread</code> and hand back token ids as zero-copy numpy arrays, so memory stays constant. The ids are identical to the original.</p>
+  <div class="nums">vs <code>main</code> from Python: <b>2.7&ndash;9.5x</b> faster, <b>92&ndash;94%</b> less memory (code: 14.3 s / 3.96 GB &rarr; 1.5 s / 0.29 GB).</div>
+  <p><a href="https://github.com/huggingface/tokenizers/pull/2542">PR #2542</a></p>
+
+  <h2>3. Thread control in tokenizers 1.0</h2>
+  <p>tokenizers 1.0 builds its own thread pool and ignores <code>RAYON_NUM_THREADS</code>, and Python has no way to set the thread count, so on shared machines it silently takes every core. I restored the environment variable and exposed <code>set_num_threads</code> in Python.</p>
+  <p><a href="https://github.com/huggingface/tokenizers/pull/2546">PR #2546</a></p>
+
+  <h2>4. toki</h2>
+  <p>My fork of HF tokenizers, where the three changes above were developed and benchmarked at larger scale: thread counts, vocab sizes, 11 pre-tokenizers, 10 normalizers, 1 and 10 GB corpora across four datasets.</p>
+  <p><a href="https://github.com/nov3o/tokenizers">nov3o/tokenizers</a></p>
+
+  <h2>5. Faster loading of quantized models in transformers</h2>
+  <p>When transformers quantizes a model while loading it (for example bitsandbytes 4-bit), it reads checkpoint tensors one at a time; on network filesystems that runs at 0.3&ndash;0.7 GB/s, far below what the disk can do. Worker threads now read whole tensors ahead of the quantizer, within a memory budget.</p>
+  <div class="nums"><b>3&ndash;21x</b> faster loads on five real models on H100 (Gemma-2-27B fp32: 353 s &rarr; 19 s).</div>
+  <p><a href="https://github.com/huggingface/transformers/pull/50488">PR #50488</a></p>
+
+  <h2>6. Model inspector: running any model without its weights</h2>
+  <p><code>from_config()</code> needs the full weights in memory, about 1 TB for a 500B model in bf16, and the meta device uses no memory but can't run a forward pass. <code>from_pretrained(dummy=True)</code> builds the real model from its config with procedurally generated weights, so it runs at near-zero memory. You can test loading, quantization, parallelism and generation code on a 500B architecture on one machine.</p>
+  <p><a href="https://github.com/huggingface/transformers/pull/50371">PR #50371</a></p>
+
+  <h2>7. NF4 grouped GEMM for MoE experts</h2>
+  <p>There is no grouped 4-bit kernel for mixture-of-experts layers on A100/H100: transformers leaves fused experts in bf16, and looping bitsandbytes over experts is slow. I wrote a kernel that runs all experts of an MoE layer in one launch on 4-bit NF4 weights, published in Triton on the Hugging Face kernel hub, with a CUDA version on top.</p>
+  <div class="nums">CUDA version: up to <b>1.33x</b> faster than bf16 for a whole MoE layer at decode (1&ndash;8 tokens, H100, Qwen3-30B-A3B shapes), with <b>4x</b> less weight memory. Above 8 tokens bf16 is faster.</div>
+  <p><a href="https://huggingface.co/LegumMagister/nf4-grouped-gemm">nf4-grouped-gemm on the kernel hub</a></p>
+
+  <h2>8. lazycomb</h2>
+  <p><code>itertools.product</code>, <code>permutations</code> and <code>combinations</code> copy their inputs first, so nesting them over anything large runs out of memory before the first element. lazycomb gives drop-in, itertools-compatible versions in Python and Rust that never evaluate their inputs. You can iterate any composition of combinatorial groups, with size, random access (<code>x[i]</code>) and ranking (<code>.index(x)</code>) in O(1) over spaces of 10<sup>275</sup>+ elements.</p>
+  <p><a href="https://github.com/nov3o/lazycomb">nov3o/lazycomb</a> &middot; <a href="https://github.com/more-itertools/more-itertools/issues/1352">discussion</a></p>
+</main>
+</body>
+</html>
