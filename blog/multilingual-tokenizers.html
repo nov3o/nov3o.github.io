@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Multilingual tokenizers – Ilia Badanin</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <style>
+  body{max-width:760px;margin:40px auto;padding:0 16px;font:17px/1.6 Lato,Verdana,Helvetica,sans-serif;color:#222;background:#fff}
+  a{color:#1772d0;text-decoration:none}a:hover{color:#f09228}
+  h1{font-size:30px;line-height:1.25}h2{margin-top:2em}
+  code{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:90%}
+  table{border-collapse:collapse;font-size:14px;display:block;overflow-x:auto;margin:1em 0}
+  th,td{border:1px solid #ddd;padding:4px 8px;text-align:left;white-space:nowrap}th{background:#f6f6f6}
+  hr{border:0;border-top:1px solid #ddd;margin:2em 0}.back{font-size:14px}
+  </style>
+</head>
+<body>
+<p class="back"><a href="../index.html">← Ilia Badanin</a> · Nov 2026</p>
+<h1 id="how-a-multilingual-tokenizer-should-be-done">How a multilingual
+tokenizer should be done</h1>
+<p>Byte-level BPE starts every language from the same 256 bytes. That
+sounds fair. It isn't: English starts with its alphabet already done,
+and everyone else starts with shrapnel.</p>
+<h2 id="the-wasted-merges">The wasted merges</h2>
+<p>In UTF-8, only <code>a</code>–<code>z</code> (and friends) are one
+byte. A Russian <code>п</code> is two bytes, <code>D0 BF</code>. A Hindi
+<code>क</code> is three. A rare CJK character can be four.</p>
+<p>BPE does eventually glue these back together. But look at what it
+spends to get there:</p>
+<ul>
+<li><strong>1 merge</strong> per letter for 2-byte scripts (Cyrillic,
+Greek, Arabic, Hebrew, accented Latin).</li>
+<li><strong>2 merges</strong> per letter for 3-byte scripts (Indic,
+Thai, Khmer, Ethiopic, Hangul, CJK).</li>
+<li><strong>3 merges</strong> for 4-byte characters.</li>
+</ul>
+<p>These are the most obvious merges in the whole corpus.
+<code>D0</code> followed by <code>BF</code> <em>is</em> <code>п</code>,
+always, everywhere. There is nothing to learn. Yet the trainer counts
+those byte pairs across billions of words, ranks them against real
+subwords, and burns vocabulary slots and merge steps rediscovering a
+fact that is written down in the Unicode standard. For Devanagari alone
+that's ~160 merges before the tokenizer has learned a single Hindi
+word.</p>
+<p>And it only happens if the script is frequent enough. A rare script
+never gets its letters rebuilt, so the model has to learn that three
+byte tokens mean one letter, and it can happily emit half a
+character.</p>
+<h2 id="just-preload-the-alphabets">Just preload the alphabets</h2>
+<p>The fix is boring: put every letter of every living script into the
+base vocabulary before the first merge. Alphabets are small. Here's
+roughly what each one costs (both cases, plus the diacritics/vowel signs
+actually in use):</p>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Base tokens to add</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Latin, all accented letters (incl. Vietnamese)</td>
+<td>~400–600</td>
+</tr>
+<tr>
+<td>Cyrillic (all modern languages)</td>
+<td>~250 (Russian alone: 66)</td>
+</tr>
+<tr>
+<td>Greek (monotonic)</td>
+<td>~75</td>
+</tr>
+<tr>
+<td>Armenian</td>
+<td>~80</td>
+</tr>
+<tr>
+<td>Georgian</td>
+<td>~35 (~70 with capitals)</td>
+</tr>
+<tr>
+<td>Hebrew (letters + niqqud)</td>
+<td>~50</td>
+</tr>
+<tr>
+<td>Arabic (Arabic, Persian, Urdu, … + harakat)</td>
+<td>~150</td>
+</tr>
+<tr>
+<td>Devanagari</td>
+<td>~80</td>
+</tr>
+<tr>
+<td>Bengali, Gujarati, Gurmukhi</td>
+<td>~70 each</td>
+</tr>
+<tr>
+<td>Tamil</td>
+<td>~50</td>
+</tr>
+<tr>
+<td>Telugu, Kannada, Malayalam, Sinhala</td>
+<td>~80 each</td>
+</tr>
+<tr>
+<td>Thai, Lao, Khmer, Myanmar</td>
+<td>~70–90 each</td>
+</tr>
+<tr>
+<td>Ethiopic (Amharic, Tigrinya)</td>
+<td>~350 syllables</td>
+</tr>
+<tr>
+<td>Canadian syllabics (Inuktitut, Cree)</td>
+<td>~300</td>
+</tr>
+<tr>
+<td><strong>All of the above</strong></td>
+<td><strong>~3,500</strong></td>
+</tr>
+<tr>
+<td>Japanese kana</td>
+<td>~180</td>
+</tr>
+<tr>
+<td>Hangul</td>
+<td>2,350 common syllables (~99.9% of text), or all 11,172, or just 67
+jamo</td>
+</tr>
+<tr>
+<td>Japanese kanji (jōyō)</td>
+<td>2,136</td>
+</tr>
+<tr>
+<td>Chinese (common)</td>
+<td>3,500 (~99.5% of text); 8,105 for the full standard list</td>
+</tr>
+<tr>
+<td><strong>Everything, with common CJK and Hangul</strong></td>
+<td><strong>~10,000</strong> (most kanji are also common hanzi)</td>
+</tr>
+</tbody>
+</table>
+<p>The only expensive ones are the composite systems: Chinese, kanji and
+precomposed Hangul. Everything else in the world fits in about 3.5k
+tokens. With common CJK and Hangul, the whole seed is ~10k, which is a
+rounding error on a 150–260k vocabulary. Keep a byte fallback for the
+long tail and nothing is ever out of vocabulary.</p>
+<h2 id="does-anyone-do-this">Does anyone do this?</h2>
+<p>I checked which letters exist as a single token in each tokenizer
+(share of the Unicode block's letters, archaic ones included, so 100%
+isn't the target):</p>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th></th>
+<th>Qwen3.8</th>
+<th>Qwen3</th>
+<th>Llama 3.1</th>
+<th>Llama 4</th>
+<th>*Gemma 3/4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Latin accented</strong></td>
+<td>coverage</td>
+<td>64%</td>
+<td>99%</td>
+<td>57%</td>
+<td>72%</td>
+<td>97%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>933–169791</td>
+<td>963–149473</td>
+<td>978–125927</td>
+<td>397–199702</td>
+<td>236859–253919</td>
+</tr>
+<tr>
+<td><strong>Vietnamese</strong></td>
+<td>coverage</td>
+<td>87%</td>
+<td>100%</td>
+<td>57%</td>
+<td>72%</td>
+<td>99%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>19614–169811</td>
+<td>20229–145925</td>
+<td>20842–125612</td>
+<td>1308–193812</td>
+<td>237200–255423</td>
+</tr>
+<tr>
+<td><strong>Greek</strong></td>
+<td>coverage</td>
+<td>46%</td>
+<td>81%</td>
+<td>47%</td>
+<td>48%</td>
+<td>77%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>18374–169749</td>
+<td>18945–150363</td>
+<td>19481–124128</td>
+<td>843–178077</td>
+<td>237003–255919</td>
+</tr>
+<tr>
+<td><strong>Cyrillic</strong></td>
+<td>coverage</td>
+<td>40%</td>
+<td>78%</td>
+<td>34%</td>
+<td>41%</td>
+<td>62%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>1403–169826</td>
+<td>1456–151420</td>
+<td>1482–127799</td>
+<td>272–192231</td>
+<td>236801–255644</td>
+</tr>
+<tr>
+<td><strong>Armenian</strong></td>
+<td>coverage</td>
+<td>44%</td>
+<td>92%</td>
+<td>1%</td>
+<td>16%</td>
+<td>97%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>149048–169800</td>
+<td>144925–151457</td>
+<td>117223</td>
+<td>22876–199907</td>
+<td>237551–252229</td>
+</tr>
+<tr>
+<td><strong>Georgian</strong></td>
+<td>coverage</td>
+<td>66%</td>
+<td>68%</td>
+<td>0%</td>
+<td>68%</td>
+<td>74%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>148466–169748</td>
+<td>144666–150471</td>
+<td>—</td>
+<td>1138–196769</td>
+<td>237087–254457</td>
+</tr>
+<tr>
+<td><strong>Hebrew</strong></td>
+<td>coverage</td>
+<td>100%</td>
+<td>100%</td>
+<td>52%</td>
+<td>100%</td>
+<td>100%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>30654–169133</td>
+<td>31693–124764</td>
+<td>32793–95526</td>
+<td>1343–55948</td>
+<td>237069–240342</td>
+</tr>
+<tr>
+<td><strong>Arabic</strong></td>
+<td>coverage</td>
+<td>86%</td>
+<td>98%</td>
+<td>86%</td>
+<td>86%</td>
+<td>86%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>5525–148975</td>
+<td>5703–150385</td>
+<td>5821–102972</td>
+<td>400–34716</td>
+<td>236821–238094</td>
+</tr>
+<tr>
+<td><strong>Devanagari</strong></td>
+<td>coverage</td>
+<td>56%</td>
+<td>50%</td>
+<td>51%</td>
+<td>56%</td>
+<td>74%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>23121–194007</td>
+<td>23868–151517</td>
+<td>24810–125661</td>
+<td>638–170496</td>
+<td>236790–255438</td>
+</tr>
+<tr>
+<td><strong>Bengali</strong></td>
+<td>coverage</td>
+<td>76%</td>
+<td>56%</td>
+<td>8%</td>
+<td>73%</td>
+<td>88%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>39947–169744</td>
+<td>41312–150412</td>
+<td>42412–87648</td>
+<td>1759–183756</td>
+<td>236816–255489</td>
+</tr>
+<tr>
+<td><strong>Tamil</strong></td>
+<td>coverage</td>
+<td>76%</td>
+<td>55%</td>
+<td>6%</td>
+<td>51%</td>
+<td>96%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>44808–169756</td>
+<td>46354–150428</td>
+<td>47454–91702</td>
+<td>11502–185838</td>
+<td>236849–252320</td>
+</tr>
+<tr>
+<td><strong>Telugu</strong></td>
+<td>coverage</td>
+<td>58%</td>
+<td>17%</td>
+<td>0%</td>
+<td>47%</td>
+<td>79%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>148575–169815</td>
+<td>147368–151520</td>
+<td>—</td>
+<td>5494–181324</td>
+<td>236979–248236</td>
+</tr>
+<tr>
+<td><strong>Thai</strong></td>
+<td>coverage</td>
+<td>92%</td>
+<td>95%</td>
+<td>92%</td>
+<td>92%</td>
+<td>97%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>18064–169510</td>
+<td>18625–147829</td>
+<td>19138–114918</td>
+<td>935–121893</td>
+<td>236988–248297</td>
+</tr>
+<tr>
+<td><strong>Khmer</strong></td>
+<td>coverage</td>
+<td>51%</td>
+<td>39%</td>
+<td>1%</td>
+<td>66%</td>
+<td>80%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>82619–169727</td>
+<td>85575–150552</td>
+<td>86675</td>
+<td>4712–198494</td>
+<td>237335–252036</td>
+</tr>
+<tr>
+<td><strong>Myanmar</strong></td>
+<td>coverage</td>
+<td>31%</td>
+<td>27%</td>
+<td>0%</td>
+<td>8%</td>
+<td>68%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>148612–169782</td>
+<td>146086–151523</td>
+<td>—</td>
+<td>3970–26188</td>
+<td>237219–253634</td>
+</tr>
+<tr>
+<td><strong>Ethiopic</strong></td>
+<td>coverage</td>
+<td>6%</td>
+<td>34%</td>
+<td>0%</td>
+<td>38%</td>
+<td>79%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>169253–169807</td>
+<td>146490–151528</td>
+<td>—</td>
+<td>9884–195780</td>
+<td>237488–255939</td>
+</tr>
+<tr>
+<td><strong>Canadian syllabics</strong></td>
+<td>coverage</td>
+<td>0%</td>
+<td>11%</td>
+<td>0%</td>
+<td>0%</td>
+<td>12%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>—</td>
+<td>144580–151639</td>
+<td>—</td>
+<td>—</td>
+<td>244233–255960</td>
+</tr>
+<tr>
+<td><strong>Hangul syllables</strong></td>
+<td>coverage</td>
+<td>9%</td>
+<td>22%</td>
+<td>5%</td>
+<td>7%</td>
+<td>16%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>12434–169827</td>
+<td>12802–151553</td>
+<td>13094–127675</td>
+<td>1162–199888</td>
+<td>237077–255966</td>
+</tr>
+<tr>
+<td><strong>CJK (U+4E00–9FFF)</strong></td>
+<td>coverage</td>
+<td>26%</td>
+<td>40%</td>
+<td>11%</td>
+<td>17%</td>
+<td>45%</td>
+</tr>
+<tr>
+<td></td>
+<td>ids</td>
+<td>95726–247200</td>
+<td>7948–143852</td>
+<td>8107–127999</td>
+<td>598–199586</td>
+<td>236918–255965</td>
+</tr>
+</tbody>
+</table>
+<p>Not really.</p>
+<p>Apart from Gemma's seed, every letter in this table got there by an
+automatic merge, not by preloading. That's how you end up with Llama 3.1
+at 0% on Telugu and 34% on Cyrillic: a Telugu or Russian user types a
+perfectly ordinary, well-recognized letter, and the model sees two or
+three loose bytes.</p>
+<ul>
+<li><strong>*Gemma</strong>, actually does seed. SentencePiece lists the
+merged pieces first and appends the seed characters after them. They
+exist from step zero, and that's why Gemma has the best coverage on most
+scripts. The catch: <em>which</em> characters get seeded is a frequency
+cut on the training data, not a design choice. Anything below the cut
+still falls back to raw bytes that are never merged.</li>
+<li><strong>Qwen3</strong> gets good coverage the brute-force way: a
+block of rare characters bolted onto the end of the merges (ids ≈
+144k–151k).</li>
+<li><strong>Llama 3.1</strong> has zero single-token letters in
+Georgian, Telugu, Myanmar, Ethiopic and Canadian syllabics.</li>
+</ul>
+<h2 id="not-just-alphabets">Not just alphabets</h2>
+<p>The same goes for any domain with a fixed vocabulary. In code,
+<code>def</code>, <code>class</code>, <code>import</code>,
+<code>return</code>, <code>for</code>, <code>if</code>,
+<code>else</code>, <code>while</code>, <code>#include</code>,
+<code>function</code>, <code>const</code>,
+<code>public static void</code> and the common indentation runs are
+known in advance for every major language. A trainer that has to
+assemble <code>import</code> from <code>i</code>, <code>m</code>,
+<code>p</code>… on every run is doing the same wasted work. Seed the
+reserved words and standard sequences as base tokens and let the merges
+go to what's actually new.</p>
+<h2 id="what-this-doesnt-fix">What this doesn't fix</h2>
+<p>Seeding equalizes the start, not the finish: merges still go to
+whoever has the most data. But it stops the trainer from wasting its
+first moves on facts it could have been told, and it means every
+language begins where English always did, at its own alphabet.</p>
+</body>
+</html>
